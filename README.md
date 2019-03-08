@@ -2,7 +2,7 @@
 
 This tagger is based on `tensorflow` and `fastText`. 
 You need to prepare training, testing data and char, word embedding by yourself.
-Now, the model is only support for binary classification i.e., `TARGET` and `OTHER` but you can easily modify the code to extend model to multiclass version.
+Now, the model is only support for binary classification i.e., `TARGET` and `OTHER` but you can easily modify the code to extend the model to multiclass version.
 
 ## Install requirements
 
