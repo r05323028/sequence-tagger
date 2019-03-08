@@ -11,16 +11,16 @@ def dump_sentence(sent):
 
     return char, word, labels
 
-def stack_features(batch, prediction=True):
+def stack_features(batch, prediction=False):
     char, word, labels = [], [], []
 
     for row in batch:
         char.append(row[0])
         word.append(row[1])
-        if prediction:
+        if not prediction:
             labels.append(row[2])
 
-    if prediction:
+    if not prediction:
         return char, word, labels
 
     return char, word

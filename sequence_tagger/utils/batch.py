@@ -48,12 +48,12 @@ class BatchFormatter:
         self._char_embedding = Embedding(kwargs.get('char_embedding_path'))
         self._word_embedding = Embedding(kwargs.get('word_embedding_path'))
 
-    def __call__(self, batch, prediction=True):
+    def __call__(self, batch, prediction=False):
         if prediction:
-            char, word, labels = stack_features(batch)
+            char, word = stack_features(batch, prediction=True)
         
         else:
-            char, word = stack_features(batch, prediction=False)
+            char, word, labels = stack_features(batch)
 
         # get max length
         max_char_len = get_max_word_length(char)
@@ -71,7 +71,7 @@ class BatchFormatter:
         char_encoded = self._char_encode(char_pad, self._char_embedding)
         word_encoded = self._word_encode(word_pad, self._word_embedding)
 
-        if prediction:
+        if not prediction:
             labels_pad = pad_sentence_sequences(labels, max_labels_len, 0)
 
             return (
