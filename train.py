@@ -54,7 +54,6 @@ def main(**args):
 
     for _ in trange(args.get('epoch_nums'), desc='epoch'):
 
-        train_counter, test_counter = 0, 0
         for batch in tqdm(train_batch_generator(), total=train_batch_generator.batch_nums, desc='training'):
             char_seq, word_seq, char_seq_len, word_seq_len, labels = batch_formatter(batch)
             model.train_on_batch(
@@ -64,11 +63,6 @@ def main(**args):
                 word_sequence_length=word_seq_len,
                 labels=labels)
 
-            if train_counter <= 10:
-                train_counter+=1
-            else:
-                break
-
         for batch in tqdm(test_batch_generator(), total=test_batch_generator.batch_nums, desc='testing'):
             char_seq, word_seq, char_seq_len, word_seq_len, labels = batch_formatter(batch)
             model.test_on_batch(
@@ -77,11 +71,6 @@ def main(**args):
                 char_sequence_length=char_seq_len,
                 word_sequence_length=word_seq_len,
                 labels=labels)
-            if test_counter <= 10:
-                test_counter+=1
-            else:
-                break
-
 
 if __name__ == "__main__":
     args = get_args()
