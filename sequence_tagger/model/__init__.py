@@ -8,6 +8,7 @@ from sequence_tagger.model.layers import Linear
 from sequence_tagger.model.layers.lstm import Char_BiLSTM, Word_BiLSTM
 from sequence_tagger.model.layers.crf import CRF
 
+
 class BaseModel(metaclass=abc.ABCMeta):
 
     def __init__(self, *args, **kwargs):
@@ -35,9 +36,10 @@ class BaseModel(metaclass=abc.ABCMeta):
 
     def load_model(self):
         model = self.saver.restore(
-            self.sess, self.model_path)
+            self.sess, self.kwargs.get('model_dir'))
 
         return model
+
 class NER(BaseModel):
 
     def __init__(self, *args, **kwargs):
