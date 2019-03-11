@@ -36,7 +36,7 @@ class BaseModel(metaclass=abc.ABCMeta):
 
     def load_model(self):
         model = self.saver.restore(
-            self.sess, self.kwargs.get('model_dir'))
+            self.sess, self.model_path)
 
         return model
 
