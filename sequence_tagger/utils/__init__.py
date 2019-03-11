@@ -1,15 +1,25 @@
 import numpy as np
 
 
-def dump_sentence(sent):
-    char, word, labels = [], [], []
+def dump_sentence(sent, prediction=False):
+    if not prediction:
+        char, word, labels = [], [], []
 
-    for w, l in sent:
-        word.append(w)
-        labels.append(l)
-        char.append(list(w))
+        for w, l in sent:
+            word.append(w)
+            char.append(list(w))
+            labels.append(l)
 
-    return char, word, labels
+        return char, word, labels
+
+    else:
+        char, word = [], []
+
+        for w in sent:
+            word.append(w)
+            char.append(list(w))
+
+        return char, word
 
 def stack_features(batch, prediction=False):
     char, word, labels = [], [], []
@@ -17,6 +27,7 @@ def stack_features(batch, prediction=False):
     for row in batch:
         char.append(row[0])
         word.append(row[1])
+        
         if not prediction:
             labels.append(row[2])
 
