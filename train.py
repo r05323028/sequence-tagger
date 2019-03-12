@@ -46,9 +46,9 @@ def load_dataset(fname):
 def main(**args):
     batch_formatter = BatchFormatter(**args)
     train_data = load_dataset(args.get('train_fp'))
-    train_batch_generator = BatchGenerator(train_data)
+    train_batch_generator = BatchGenerator(train_data, **args)
     test_data = load_dataset(args.get('test_fp'))
-    test_batch_generator = BatchGenerator(test_data)
+    test_batch_generator = BatchGenerator(test_data, **args)
 
     model = NER(**args)
 
